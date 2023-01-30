@@ -1,0 +1,101 @@
+<html>
+	<body>
+		<div style="display: flex; justify-content: center; align-items:center; background: white;">
+
+			<div style="background: white;">
+				<form onsubmit="handleFormSubmit(this)">
+					<div id="first-form">
+						<div>
+							<div style="padding: 10px; padding-bottom: 5px;" >
+								<input type="radio" name="clearableSheet" id="current"
+								onclick="changeSelection('#current')"/>
+								<label style="font-family: -apple-system;" 
+								       for="current" id="current-label"
+								       onclick="changeSelection('#current')">
+								</label>
+							</div>
+							<div style="padding: 10px; padding-top: 5px;">
+								<input type="radio" name="clearableSheet" id="All" value="All"
+								onclick="changeSelection('#All')"/>
+								<label style="font-family: -apple-system;"
+								       for="All"
+								       onclick="changeSelection('#All')">
+									All
+								</label>
+							</div>
+						</div>
+						<div style="display: flex; padding-top: 30px;">
+							<button style="margin-right: 15px; font-size: 15px; padding: 5px;
+								       border: 1px solid lightgray; border-radius: 5px;"
+								type="button" onclick="google.script.host.close()">
+								Cancel
+							</button>
+							<button style="margin-left: 15px; font-size: 15px; padding: 5px;
+								       border: 1px solid lightgray; border-radius: 5px;" 
+								type="button" onclick="toggleVisibility()" >
+								Submit
+							</button>
+						</div>
+					</div>
+					<div id="second-form" style="visibility: hidden;">
+						<div style="">
+							<p style="font-family: -apple-system; font-size: 15px;"> 
+								Are you sure to clear
+								<br>
+								<span id="selected" style="font-weight: bold;">
+								</span>
+								?
+							</p>
+						</div>
+						<div style="display: flex; padding-top: 30px;">
+							<button style="margin-right: 15px; font-size: 15px; padding: 5px;
+								       border: 1px solid lightgray; border-radius: 5px;" 
+								type="submit" onclick="disableButtons()">
+								Yes
+							</button>
+							<button style="margin-left: 15px; font-size: 15px; padding: 5px;
+								       border: 1px solid lightgray; border-radius: 5px;"
+								type="button" onclick="google.script.host.close()">
+								Cancel
+							</button>
+
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</body>
+	<script>
+		const currentSheet = document.querySelector("#current");
+		currentSheet.value = <?=currentSheet?>;
+		const currentLabel = document.querySelector("#current-label")
+		currentLabel.innerText = <?=currentSheet?>;
+		currentLabel.innerText += " (current sheet)"
+
+		function changeSelection(radioID){
+			const value = document.querySelector(radioID).value
+			document.querySelector("#selected").innerText = value
+		}
+
+		function toggleVisibility() {
+			document.querySelector("#first-form").style.visibility = "hidden"
+			document.querySelector("#second-form").style.visibility = "visible"
+		}
+
+		function cancel(formObject){
+			google.script.run.withSuccessHandler(google.script.host.close)
+		};
+		function handleFormSubmit(formObject){
+			google.script.run.withSuccessHandler(google.script.host.close).clearForm(formObject)
+		};
+		function disableButtons(){
+			const buttons = document.querySelectorAll("button")
+			buttons.forEach(button => {
+				button.disable = true
+			})
+		}
+
+	</script>
+</html>
+

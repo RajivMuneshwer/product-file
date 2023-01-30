@@ -1,0 +1,41 @@
+<html>
+	<body>
+		<div style="display: flex; justify-content: center; height: 100vh; width: 100vw;">
+			<form style="display: flex; flex-direction: column; padding: 25px;"
+				id="sellerForm" onsubmit="handleFormSubmit(this)">
+				<div>
+					<label style="font-family: -apple-system; font-size: 15px;"
+						for="sellerID">Seller : 
+					</label>
+					<select style="background: none;  padding: 10px;
+						       border-radius: 5px; border: 1px solid lightblue; font-size: 14px; "
+						name="sellerID" id="sellerID">
+						<option value="1234">Seller's Union</option>
+						<option value="1235">KLT</option>
+					</select>
+					<input type="text" name="functionCall" hidden=true>
+				</div>
+				<div style="padding: 13px; padding-top: 50px;">
+					<button style=" border: 1px solid lightgray; border-radius: 5px;
+						       font-size: 15px; padding: 10px; " 
+					type="submit"  onclick="handleClick()">
+						Submit
+					</button>
+				</div>
+				</form>
+			</div>
+		</body>
+
+		<script>
+			document.querySelector("input[type='text']").value = <?=functionCall?>;
+			function handleFormSubmit(formObject){
+				google.script.run.withSuccessHandler(google.script.host.close).getSellerID(formObject)
+		}
+			function handleClick(){
+				const button = document.querySelector("input[type='submit']")
+				button.disable = true
+				button.style.backgroundColor = "lightgrey"
+
+			}
+	</script>
+</html>
