@@ -9,5 +9,8 @@ function clearForm(clearFormObject:clearFormObject):void{
 	const { clearableSheet } = clearFormObject
 	if (!clearableSheet) return
 	if (clearableSheet == "All") return clearAll()
-	clearCurrent(clearableSheet)
+	const clearableSheets = <clearableSheet[]>clearableSheet.split(",")
+	clearableSheets.forEach(cSheet => {
+		clearCurrent(cSheet)
+	})
 }

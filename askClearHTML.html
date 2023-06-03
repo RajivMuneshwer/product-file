@@ -23,6 +23,14 @@
 									All
 								</label>
 							</div>
+							<div style="padding: 10px; padding-top: 5px;">
+								<input type="radio" name="clearableSheet" id="except" 
+								onclick="changeSelection('#except')"/>
+								<label style="font-family: -apple-system;"
+								       for="except" id="except-label"
+								       onclick="changeSelection('#except')">
+								</label>
+							</div>
 						</div>
 						<div style="display: flex; padding-top: 30px;">
 							<button style="margin-right: 15px; font-size: 15px; padding: 5px;
@@ -69,9 +77,27 @@
 	<script>
 		const currentSheet = document.querySelector("#current");
 		currentSheet.value = <?=currentSheet?>;
-		const currentLabel = document.querySelector("#current-label")
+		const currentLabel = document.querySelector("#current-label");
 		currentLabel.innerText = <?=currentSheet?>;
-		currentLabel.innerText += " (current sheet)"
+		currentLabel.innerText += " (current sheet)";
+
+		const exceptRadio = document.querySelector("#except");
+		const clearableSheetSet = new Set();
+		clearableSheetSet.add("Fidelity");
+		clearableSheetSet.add("Inventory");
+		clearableSheetSet.add("Reference");
+		clearableSheetSet.add("Complete");
+		clearableSheetSet.delete(<?=currentSheet?>);
+
+		let exceptRadioValue = ""
+		clearableSheetSet.forEach(sheet => {
+			exceptRadioValue += `${sheet},`
+		});
+		exceptRadioValue = exceptRadioValue.slice(0, -1);
+		exceptRadio.value = exceptRadioValue;
+		const exceptLabel = document.querySelector("#except-label")
+		exceptLabel.innerText = "Except"
+		exceptLabel.innerText += ` ${<?=currentSheet?>}`;
 
 		function changeSelection(radioID){
 			const value = document.querySelector(radioID).value
