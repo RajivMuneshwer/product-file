@@ -2,6 +2,7 @@ type sheet = GoogleAppsScript.Spreadsheet.Sheet
 type range = GoogleAppsScript.Spreadsheet.Range
 type spreadsheet = GoogleAppsScript.Spreadsheet.Spreadsheet
 type properties = GoogleAppsScript.Properties.Properties
+type document = GoogleAppsScript.Document.Document
 type functionCall = "fidelityUpdate" | "inventoryUpdate"
 type clearableSheet = "Fidelity" | "Reference" | "Inventory" | "Complete"
 interface clearFormObject {

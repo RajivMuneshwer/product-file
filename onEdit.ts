@@ -1,11 +1,11 @@
 function edit(){
 	const currentSheet = SpreadsheetApp.getActiveSheet()
-	if (!currentSheet.getCurrentCell().isBlank()) return
 	const sheetName = <clearableSheet> currentSheet.getName()
+	const clearableSheetsSet = new Set<clearableSheet>()
+	clearableSheetsSet.add("Fidelity")
+	clearableSheetsSet.add("Inventory")
+	clearableSheetsSet.add("Reference")
 
-	const clearableSheets:clearableSheet[] = ["Fidelity", "Complete", "Inventory", "Reference"]
-
-	if (! clearableSheets.includes(sheetName) ) return
+	if (!clearableSheetsSet.has(sheetName)) return
 	askClearUI(sheetName)
-
 }

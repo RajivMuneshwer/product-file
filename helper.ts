@@ -7,15 +7,15 @@ const columnMaker = (sheetName:string, sheet:sheet) => {
 	return (name:string, number:number) => new Column(`${sheetName}-${name}`, number, sheet)
 }
 const clearableSheetMaker = (clearableSheetName:clearableSheet) => {
-	switch(clearableSheetName){
-		case "Fidelity":
-			return new Fidelitysheet()
-		case "Complete":
-			return new Completesheet()
-		case "Reference":
-			return new Referencesheet()
-		case "Inventory":
-			return new Inventorysheet()
+	const clearableSheets = {
+		"Fidelity":()=>{return new Fidelitysheet()},
+		"Complete":()=>{return new Completesheet()},
+		"Reference":()=>{return new Referencesheet()},
+		"Inventory":()=>{return new Inventorysheet()}
 	}
+	return clearableSheets[clearableSheetName]()
+}
 
+const getPriceTagDocument = ():document => {
+	return DocumentApp.openById("10mn3qNnYo090CSC5nSNg_a0CwPCej-BCNIH_zTmPSnc")
 }

@@ -1,6 +1,7 @@
 function clearCurrent(clearableSheet?:clearableSheet){
-	let newClearableSheet = clearableSheet ?? <clearableSheet> SpreadsheetApp.getActiveSheet().getName()
-	clearableSheetMaker(newClearableSheet).clear()
+	if (clearableSheet){
+		clearableSheetMaker(clearableSheet).clear()
+	}
 }
 function clearAll(){
 	new Referencesheet().clear()

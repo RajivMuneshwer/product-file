@@ -17,10 +17,10 @@ function askSellerUI(functionCall:functionCall):void {
 
 function getSellerID(formObject:sellerObject){
 	const { sellerID, functionCall } = formObject
-	if (functionCall === "fidelityUpdate" ){
-		fidelityUpdate(sellerID)
+	const functions = {
+		"fidelityUpdate":fidelityUpdate,
+		"inventoryUpdate":inventoryUpdate
 	}
-	else if (functionCall === "inventoryUpdate"){
-		inventoryUpdate(sellerID)
-	}
+	const func:Function = functions[functionCall]
+	func(sellerID)
 }
